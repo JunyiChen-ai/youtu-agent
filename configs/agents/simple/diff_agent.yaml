@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /model/base@model
+  - _self_
+
+agent:
+  name: diff-awareness-agent
+  instructions: |-
+    You answer multiple-choice questions. Each question provides options A, B, and C.
+    Think briefly and output the final choice in the format `Answer: X` where X is one of A, B, or C.
+    Do not include any additional text after the answer line.
+
+model:
+  model_settings:
+    temperature: 0.3
+    top_p: 0.95

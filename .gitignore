@@ -42,7 +42,6 @@ wheels/
 
 # Data directories
 /.cache/
-/data/
 /site/
 /logs/
 

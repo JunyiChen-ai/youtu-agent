@@ -193,6 +193,11 @@ async def main(args):
         from training_free_grpo.web.verify import verify_func
         from training_free_grpo.web.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
         config_name = "simple/search_agent.yaml"
+    elif args.domain == "diff":
+        from training_free_grpo.diff.dataset import load_data
+        from training_free_grpo.diff.verify import verify_func
+        from training_free_grpo.diff.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
+        config_name = "simple/diff_agent.yaml"
     else:
         raise ValueError(f"Unsupported domain: {args.domain}")
 
@@ -255,7 +260,7 @@ async def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training-Free GRPO Evaluation")
     parser.add_argument("--mode", type=str, default="agent", required=True, choices=["prompt", "agent"], help="Mode of inference")
-    parser.add_argument("--domain", type=str, required=True, choices=["math", "web"], help="The domain of the experiment")
+    parser.add_argument("--domain", type=str, required=True, choices=["math", "web", "diff"], help="The domain of the experiment")
     parser.add_argument("--experiment_name", type=str, required=True, help="Name of the experiment run")
     parser.add_argument("--dataset", type=str, required=True, help="Name of dataset")
     parser.add_argument("--dataset_truncate", type=int, default=None, help="Truncate dataset to first N samples")
