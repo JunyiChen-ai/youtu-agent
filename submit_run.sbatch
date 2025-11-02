@@ -38,7 +38,8 @@ VLLM_GPU_UTIL=${VLLM_GPU_UTIL:-0.7}
 UTU_DB_URL=${UTU_DB_URL:-sqlite:///utu.db}
 
 # Ensure proxy variables do not interfere with local requests
-unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+export NO_PROXY=127.0.0.1,localhost; export no_proxy=127.0.0.1,localhost
+# unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
 
 echo "[INFO] Launching vLLM server on port ${VLLM_PORT} with model ${VLLM_MODEL_ID}"
 python -m vllm.entrypoints.openai.api_server \

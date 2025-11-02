@@ -1,51 +1,343 @@
-from __future__ import annotations
-
 import json
-from collections import OrderedDict
-from pathlib import Path
-from typing import Any, Dict, List
+import copy
+import os
+import re
 
-from .verify import extract_choice
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
+from training_free_grpo.llm import LLM
+from training_free_grpo.diff.prompts import (
+    SINGLE_QUERY_CRITIQUE_TEMPLATE_SP,
+    SINGLE_QUERY_CRITIQUE_TEMPLATE_UP,
+    SINGLE_ROLLOUT_SUMMARY_TEMPLATE_SP,
+    SINGLE_ROLLOUT_SUMMARY_TEMPLATE_UP,
+    GROUP_EXPERIENCE_UPDATE_TEMPLATE_SP,
+    GROUP_EXPERIENCE_UPDATE_TEMPLATE_UP,
+    BATCH_EXPERIENCE_UPDATE_TEMPLATE_SP,
+    BATCH_EXPERIENCE_UPDATE_TEMPLATE_UP,
+)
 
 
 class ExperienceUpdater:
-    """A lightweight updater that keeps successful answer snippets."""
+    """Replicated updater pipeline (same as web) for diff domain."""
 
-    def __init__(self, max_experiences: int = 50):
-        self.max_experiences = max_experiences
+    def __init__(self):
+        self.llm = LLM()
 
     def run(
         self,
-        rollouts: List[Dict[str, Any]],
-        experiences: Dict[str, str],
-        save_dir: str | Path,
-        **_: Any,
-    ) -> Dict[str, str]:
-        updated = OrderedDict(experiences)
+        rollouts,
+        experiences,
+        save_dir,
+        max_workers: int = 16,
+        given_ground_truth: bool = True,
+        only_partial_correct: bool = True,
+    ):
+        # 1. Summarize trajectory for each rollout
+        problem_to_summarized_rollouts = self._single_rollout_summary(
+            rollouts=rollouts,
+            save_dir=save_dir,
+            max_workers=max_workers,
+            given_ground_truth=given_ground_truth,
+            only_partial_correct=only_partial_correct,
+        )
 
-        success_snippets: List[str] = []
-        for entry in rollouts:
-            if entry.get("reward", 0) <= 0:
+        # 2. Generate critique for each query
+        new_experiences = self._single_query_critique(
+            problem_to_summarized_rollouts=problem_to_summarized_rollouts,
+            experiences=experiences,
+            save_dir=save_dir,
+            max_workers=max_workers,
+            given_ground_truth=given_ground_truth,
+            only_partial_correct=only_partial_correct,
+        )
+
+        # 3. group update experiences
+        critiques = self._group_update(
+            experiences=experiences,
+            new_experiences=new_experiences,
+            save_dir=save_dir,
+            max_workers=max_workers,
+        )
+
+        # 4. batch update experiences
+        new_experiences = self._batch_update(
+            experiences=experiences,
+            critiques=critiques,
+            save_dir=save_dir,
+        )
+
+        # 5. assign new experience IDs
+        new_experiences = {f"G{i}": exp for i, exp in enumerate(new_experiences.values())}
+        return new_experiences
+
+    def _single_rollout_summary(
+        self,
+        rollouts,
+        save_dir,
+        max_workers,
+        given_ground_truth=True,
+        only_partial_correct=True,
+    ):
+        filename = os.path.join(save_dir, "single_rollout_summary.json")
+        if os.path.exists(filename):
+            with open(filename) as f:
+                results = json.load(f)
+                if len(results) > 0:
+                    print("Single rollout summary")
+                    print("- File exists, loaded from:", filename)
+                    return results
+
+        # group by problems
+        problems_to_rollouts = defaultdict(list)
+        for each in rollouts:
+            if "trajectories" in each and len(each["trajectories"]) > 0:
+                problems_to_rollouts[each["problem"]].append(each)
+        results = defaultdict(list)
+
+        all_rollouts_to_process = []
+        for rlist in problems_to_rollouts.values():
+            if given_ground_truth and only_partial_correct:
+                scores = [each["reward"] for each in rlist]
+                avg = sum(scores) / len(scores)
+                if avg > 0 and avg < 1:
+                    all_rollouts_to_process.extend(rlist)
+            else:
+                all_rollouts_to_process.extend(rlist)
+
+        def process(cur):
+            try:
+                up = SINGLE_ROLLOUT_SUMMARY_TEMPLATE_UP.format(
+                    task=cur.get("problem", ""),
+                    trajectory=cur["trajectories"][0]["trajectory"],
+                    answer=cur.get("groundtruth", "") if given_ground_truth else "[REDACTED]",
+                )
+                response = self.llm.chat(
+                    [
+                        {"role": "system", "content": SINGLE_ROLLOUT_SUMMARY_TEMPLATE_SP},
+                        {"role": "user", "content": up},
+                    ]
+                )
+                return {"trajectory_summary": response, **cur}
+            except Exception as e:
+                print(f"Warning: failed in single rollout summary, {e}")
+                return None
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_rollout = {executor.submit(process, cur): cur for cur in all_rollouts_to_process}
+            for future in tqdm(as_completed(future_to_rollout), total=len(all_rollouts_to_process), desc="Single rollout summary"):
+                result = future.result()
+                if result is not None:
+                    problem = result["problem"]
+                    results[problem].append(result)
+
+        with open(filename, "w") as f:
+            json.dump(results, f, indent=2)
+        return results
+
+    def _single_query_critique(
+        self,
+        problem_to_summarized_rollouts,
+        experiences,
+        save_dir,
+        max_workers,
+        max_operations=1,
+        given_ground_truth=True,
+        only_partial_correct=True,
+    ):
+        filename = os.path.join(save_dir, "single_query_critique.json")
+        if os.path.exists(filename):
+            with open(filename) as f:
+                results = json.load(f)
+                if len(results) > 0:
+                    print("Single query critique")
+                    print("- File exists, loaded from:", filename)
+                    return results
+
+        all_groups = []
+        for rlist in problem_to_summarized_rollouts.values():
+            if given_ground_truth and only_partial_correct:
+                scores = [each["reward"] for each in rlist]
+                avg = sum(scores) / len(scores)
+                if avg > 0 and avg < 1:
+                    all_groups.append(rlist)
+            else:
+                all_groups.append(rlist)
+
+        def process(rollouts_per_problem):
+            try:
+                problem = rollouts_per_problem[0]["problem"]
+                answer = rollouts_per_problem[0].get("groundtruth", "")
+                formatted_trajectories = "\n\n".join(
+                    [
+                        f"Attempt {i+1} (Answer {'correct' if each['reward'] else 'wrong'}):\n{each['trajectory_summary']}"
+                        for i, each in enumerate(rollouts_per_problem)
+                    ]
+                )
+                up = SINGLE_QUERY_CRITIQUE_TEMPLATE_UP.format(
+                    question=problem,
+                    answer=answer if given_ground_truth else "[REDACTED]",
+                    attempts=formatted_trajectories,
+                )
+                response = self.llm.chat(
+                    [
+                        {"role": "system", "content": SINGLE_QUERY_CRITIQUE_TEMPLATE_SP},
+                        {"role": "user", "content": up},
+                    ]
+                )
+                pattern = re.compile(r"<Experiences>\s*(.*?)\s*</Experiences>", re.DOTALL | re.IGNORECASE)
+                match = pattern.search(response)
+                extracted = match.group(1).strip() if match else ""
+                return {"rollouts": rollouts_per_problem, "critique": response, "experiences": extracted}
+            except Exception as e:
+                print(f"Warning: failed in single query critique, {e}")
+                return None
+
+        results = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_case = {executor.submit(process, rlist): rlist for rlist in all_groups}
+            for future in tqdm(as_completed(future_to_case), total=len(all_groups), desc="Single query critique"):
+                result = future.result()
+                if result is not None:
+                    results.append(result)
+
+        with open(filename, "w") as f:
+            json.dump(results, f, indent=2)
+        return results
+
+    def _group_update(self, experiences, new_experiences, save_dir, max_workers=16):
+        filename = os.path.join(save_dir, "group_update.json")
+        if os.path.exists(filename):
+            with open(filename) as f:
+                results = json.load(f)
+                if len(results) > 0:
+                    print("Group update")
+                    print("- File exists, loaded from:", filename)
+                    return results
+
+        def process(new_experience):
+            try:
+                formatted_experiences = "\n".join([f"[{i}]. {e}" for i, e in experiences.items()]) if experiences else "None"
+                up = GROUP_EXPERIENCE_UPDATE_TEMPLATE_UP.format(
+                    existing_experiences=formatted_experiences,
+                    new_experiences=new_experience["experiences"],
+                )
+                response = self.llm.chat(
+                    [
+                        {"role": "system", "content": GROUP_EXPERIENCE_UPDATE_TEMPLATE_SP},
+                        {"role": "user", "content": up},
+                    ]
+                )
+                response = response.split("```json")[-1].split("```")[0]
+                operations = json.loads(response)
+                return {"operations": operations, **new_experience}
+            except Exception as e:
+                print(f"Warning: failed in group update, {e}")
+                return None
+
+        results = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_case = {executor.submit(process, ne): ne for ne in new_experiences}
+            for future in tqdm(as_completed(future_to_case), total=len(new_experiences), desc="Group update"):
+                result = future.result()
+                if result is not None:
+                    results.append(result)
+
+        with open(filename, "w") as f:
+            json.dump(results, f, indent=2)
+        return results
+
+    def _batch_update(self, experiences, critiques, save_dir, max_retries=3):
+        print("Batch update")
+        filename = os.path.join(save_dir, "batch_update.json")
+        if os.path.exists(filename):
+            results = json.load(open(filename))
+            print("- File exists, loaded from:", filename)
+            return results
+
+        all_operations = []
+        for each in critiques:
+            all_operations.extend(each.get("operations", []))
+        print("- Num of operations to process:", len(all_operations))
+
+        revision_plan = []
+        response = ""
+        for _ in range(max_retries):
+            try:
+                up = BATCH_EXPERIENCE_UPDATE_TEMPLATE_UP.format(
+                    experiences_and_operations=self._format_exp_and_ops(experiences, all_operations)
+                )
+                response = self.llm.chat(
+                    [
+                        {"role": "system", "content": BATCH_EXPERIENCE_UPDATE_TEMPLATE_SP},
+                        {"role": "user", "content": up},
+                    ]
+                )
+                revision_plan = json.loads(response.split("```json")[-1].split("```")[0])
+                break
+            except Exception:
+                print("Warning: failed to decode in updating general experiences")
+
+        max_ID = len(experiences)
+        new_experiences = copy.deepcopy(experiences)
+        for plan in revision_plan:
+            operation = plan.get("operation", "ADD")
+            content = plan.get("content", "")
+            target_id = plan.get("id", None)
+            if not content and operation in ("ADD", "UPDATE"):
                 continue
-            choice = extract_choice(entry.get("response", ""))
-            if not choice:
-                continue
-            problem = entry.get("problem", "")
-            summary = f"For similar questions, choose option {choice}. Question snippet: {problem[:160]}"
-            success_snippets.append(summary)
 
-        idx = len(updated)
-        for snippet in success_snippets:
-            updated[f"G{idx}"] = snippet
-            idx += 1
+            if operation == "ADD":
+                new_experiences[f"{max_ID}"] = content
+                max_ID += 1
+            elif operation == "UPDATE":
+                if target_id in new_experiences:
+                    new_experiences[target_id] = content
+                else:
+                    new_experiences[f"{max_ID}"] = content
+                    max_ID += 1
+            elif operation == "DELETE":
+                if target_id in new_experiences:
+                    del new_experiences[target_id]
+            elif operation == "NONE":
+                pass
+        print("- Num of candidate experiences:", len(new_experiences))
 
-        if len(updated) > self.max_experiences:
-            # keep the latest entries
-            trimmed_items = list(updated.items())[-self.max_experiences :]
-            updated = OrderedDict(trimmed_items)
+        with open(filename, "w") as f:
+            json.dump(
+                {
+                    "operations": all_operations,
+                    "response": response,
+                    "revision_plan": revision_plan,
+                    "new_experiences": new_experiences,
+                },
+                f,
+                indent=2,
+            )
+        return new_experiences
 
-        save_path = Path(save_dir) / "experience_log.json"
-        with save_path.open("w", encoding="utf-8") as f:
-            json.dump(updated, f, indent=2)
+    def _format_exp_and_ops(self, experiences, operations):
+        if not operations:
+            return "No batch operations."
 
-        return dict(updated)
+        formatted_res = []
+        for id, exp in experiences.items():
+            curr = f"Experience {id}:\nContent: {exp}\n"
+            related_ops = [op for op in operations if op.get("id") == id]
+            if related_ops:
+                curr += "Related Operations:\n" + "\n".join(
+                    json.dumps(op, ensure_ascii=False, indent=2) for op in related_ops
+                )
+            else:
+                curr += "No related operations."
+            formatted_res.append(curr)
+
+        no_id_ops = [op for op in operations if not op.get("id")]
+        if no_id_ops:
+            curr = "Operations without specific Experience ID:\n" + "\n".join(
+                json.dumps(op, ensure_ascii=False, indent=2) for op in no_id_ops
+            )
+            formatted_res.append(curr)
+
+        return "\n\n".join(formatted_res)
