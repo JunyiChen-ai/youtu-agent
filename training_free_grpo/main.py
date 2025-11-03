@@ -78,17 +78,25 @@ async def rollout_dataset(
             try:
                 if worker_agent is None:
                     llm = LLM()
-                    coro = asyncio.to_thread(llm.chat, sample["prompt"], temperature=temperature, max_tokens=max_tokens)
-                    res = await asyncio.wait_for(coro, timeout=task_timeout)                    
+                    coro = asyncio.to_thread(
+                        llm.chat,
+                        sample["prompt"],
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                    )
+                    resp_text = await asyncio.wait_for(coro, timeout=task_timeout)
+                    final_content = resp_text.strip()
                     res = TaskRecorder(
-                            final_output=res,
-                            trajectories=[{
+                        final_output=final_content,
+                        trajectories=[
+                            {
                                 "trajectory": [
                                     {"role": "user", "content": sample["prompt"]},
-                                    {"role": "assistant", "content": res}
+                                    {"role": "assistant", "content": final_content},
                                 ]
-                            }],
-                        )
+                            }
+                        ],
+                    )
                 else:
                     async with worker_agent as agent:
                         async def rollout_streamed(sample) -> TaskRecorder:
@@ -196,7 +204,10 @@ async def main(args):
     elif args.domain == "diff":
         from training_free_grpo.diff.dataset import load_data
         from training_free_grpo.diff.verify import verify_func
-        from training_free_grpo.diff.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
+        from training_free_grpo.diff.prompts import (
+            PROBLEM_WITH_EXPERIENCE_TEMPLATE,
+            PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE,
+        )
         config_name = "simple/diff_agent.yaml"
     else:
         raise ValueError(f"Unsupported domain: {args.domain}")
@@ -218,22 +229,53 @@ async def main(args):
         print(f"- truncated to {args.dataset_truncate}")
         test_data = test_data[: args.dataset_truncate]
     
-    # Insert experiences
-    if args.experience_file:
-        experiences = json.load(open(args.experience_file))
-        formatted_experiences = "\n".join([ f"[{i}]. {e}" for i, e in experiences.items() ])
-        formatted_test_data = [{
-            "prompt": PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
-                experiences=formatted_experiences if formatted_experiences else "None",
-                problem=each["problem"],
-            ),
-            **each
-        } for each in test_data]
+    # Insert experiences / instructions
+    if args.domain == "diff":
+        experiences = json.load(open(args.experience_file)) if args.experience_file else {}
+        if experiences:
+            formatted_experiences = "\n".join([f"[{i}]. {e}" for i, e in experiences.items()])
+            formatted_test_data = [
+                {
+                    "prompt": PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
+                        experiences=formatted_experiences,
+                        problem=each["problem"],
+                    ),
+                    **each,
+                }
+                for each in test_data
+            ]
+        else:
+            formatted_test_data = [
+                {
+                    "prompt": PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE.format(
+                        problem=each["problem"],
+                    ),
+                    **each,
+                }
+                for each in test_data
+            ]
     else:
-        formatted_test_data = [{
-            "prompt": each["problem"],
-            **each
-        } for each in test_data]
+        if args.experience_file:
+            experiences = json.load(open(args.experience_file))
+            formatted_experiences = "\n".join([f"[{i}]. {e}" for i, e in experiences.items()])
+            formatted_test_data = [
+                {
+                    "prompt": PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
+                        experiences=formatted_experiences if formatted_experiences else "None",
+                        problem=each["problem"],
+                    ),
+                    **each,
+                }
+                for each in test_data
+            ]
+        else:
+            formatted_test_data = [
+                {
+                    "prompt": each["problem"],
+                    **each,
+                }
+                for each in test_data
+            ]
     
     # Duplicate for Pass@k evaluation
     formatted_test_data = formatted_test_data * args.pass_k

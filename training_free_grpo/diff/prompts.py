@@ -1,12 +1,25 @@
 PROBLEM_WITH_EXPERIENCE_TEMPLATE = """You are answering multiple choice questions. Each question has options A, B, or C.
 
-Consider the following experience snippets (if any) that capture useful reasoning patterns:
+Experience snippets (if any) that may be helpful:
 {experiences}
 
 Question:
 {problem}
 
-Please think briefly and provide the choice in the format `Answer: X` where `X` is one of A, B, or C.
+Respond using exactly the following two lines and nothing else:
+Thinking: <brief reasoning in one sentence>
+Answer: <one letter, either A, B, or C>
+"""
+
+
+PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE = """You are answering multiple choice questions. Each question has options A, B, or C.
+
+Question:
+{problem}
+
+Respond using exactly the following two lines and nothing else:
+Thinking: <brief reasoning in one sentence>
+Answer: <one letter, either A, B, or C>
 """
 
 # =====================

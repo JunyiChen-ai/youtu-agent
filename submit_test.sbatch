@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=youtu-grpo
-#SBATCH --time=48:00:00
+#SBATCH --job-name=youtu-eval
+#SBATCH --time=24:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
-#SBATCH --output=logs/slurm_%j.out
-#SBATCH --error=logs/slurm_%j.err
+#SBATCH --output=logs/test_%j.out
+#SBATCH --error=logs/test_%j.err
 
 set -euo pipefail
 
@@ -14,15 +14,14 @@ REPO_ROOT="/data/jehc223/youtu-agent"
 cd "$REPO_ROOT"
 mkdir -p logs
 
-# Activate project virtual environment
+# Activate venv
 source "${REPO_ROOT}/.venv/bin/activate"
 
-# Determine mode early for server launch configuration
-MODE=${MODE:-agent}
+# Resolve mode early for server launch behaviour
+MODE=${MODE:-prompt}
 MODE_LOWER=$(echo "${MODE}" | tr '[:upper:]' '[:lower:]')
 
-# LLM server settings
-# Choose a free port for vLLM
+# vLLM server
 if command -v python >/dev/null 2>&1; then
   VLLM_PORT=$(python - <<'PY'
 import socket
@@ -41,9 +40,7 @@ VLLM_SERVED_NAME=${VLLM_SERVED_NAME:-qwen2.5-7b}
 VLLM_GPU_UTIL=${VLLM_GPU_UTIL:-0.7}
 UTU_DB_URL=${UTU_DB_URL:-sqlite:///utu.db}
 
-# Ensure proxy variables do not interfere with local requests
 export NO_PROXY=127.0.0.1,localhost; export no_proxy=127.0.0.1,localhost
-# unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
 
 VLLM_TOOL_FLAGS=()
 if [ "${MODE_LOWER}" != "prompt" ]; then
@@ -68,7 +65,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Wait for vLLM API to become ready
 echo "[INFO] Waiting for vLLM server to become ready..."
 READY=false
 for _ in $(seq 1 30); do
@@ -85,13 +81,12 @@ if [ "${READY}" != "true" ]; then
   exit 1
 fi
 
-# Configure environment variables for Youtu-Agent
+# Configure UTU
 export UTU_LLM_TYPE=chat.completions
 export UTU_LLM_MODEL="${VLLM_SERVED_NAME}"
 export UTU_LLM_BASE_URL="http://127.0.0.1:${VLLM_PORT}/v1"
 export UTU_LLM_API_KEY="local-token"
 export DB_URL="${UTU_DB_URL}"
-echo "[INFO] UTU_LLM_BASE_URL=${UTU_LLM_BASE_URL}"
 
 cat > "${REPO_ROOT}/.env" <<EOF
 UTU_LLM_TYPE=${UTU_LLM_TYPE}
@@ -100,62 +95,22 @@ UTU_LLM_BASE_URL=${UTU_LLM_BASE_URL}
 UTU_LLM_API_KEY=${UTU_LLM_API_KEY}
 DB_URL=${UTU_DB_URL}
 EOF
-echo "[INFO] Wrote .env with UTU_LLM_BASE_URL=${UTU_LLM_BASE_URL}"
 
+# Params
 EXPERIMENT_NAME=${EXPERIMENT_NAME:-}
-DOMAIN=${DOMAIN:-math}
-MODE=${MODE:-agent}
-DATASET=${DATASET:-DAPO-Math-17k}
-DATASET_ORIG="${DATASET}"
-DATASET_TRUNCATE=${DATASET_TRUNCATE:-}
-EPOCHS=${EPOCHS:-3}
-BATCHSIZE=${BATCHSIZE:-50}
-GRPO_N=${GRPO_N:-5}
+DOMAIN=${DOMAIN:-diff}
+MODE=${MODE:-prompt}
+DATASET=${DATASET:-D1}
+PRE_N=${PRE_N:-1000}
+PASS_K=${PASS_K:-1}
 ROLLOUT_CONCURRENCY=${ROLLOUT_CONCURRENCY:-16}
-ROLLOUT_TEMPERATURE=${ROLLOUT_TEMPERATURE:-0.7}
 ROLLOUT_MAX_TOKENS=${ROLLOUT_MAX_TOKENS:-16384}
 TASK_TIMEOUT=${TASK_TIMEOUT:-1800}
 
-## (moved) Auto-generate experiment name after resolving final DATASET
-
-# Auto-preprocess for diff domain if needed
+# Resolve dataset (diff domain supports shorthand and ensures test split)
 if [ "${DOMAIN}" = "diff" ]; then
-  # N controls per-class (C and non-C) sample count for train; default to 1000 if not provided
-  PRE_N=${PRE_N:-1000}
-  # Allow shorthand DATASET like "D1" -> resolve to PKL prefix "D1_*" and use *_train
-  if [ -z "${DATASET##*_train}" ] || [ -z "${DATASET##*_test}" ]; then
-    : # already a full name with split suffix
-  else
-    if echo "${DATASET}" | grep -q "_"; then
-      : # looks like a full base already, keep as-is
-    else
-      mkdir -p data/diff_awareness/benchmark_suite
-      # try resolve by prefix match in PKL directory
-      CANDIDATES=(data/diff_awareness/benchmark_suite/${DATASET}_*.pkl)
-      if [ ! -e "${CANDIDATES[0]}" ]; then
-        echo "[ERROR] Could not resolve dataset base for '${DATASET}'. Expected PKL like ${DATASET}_*.pkl in data/diff_awareness/benchmark_suite" >&2
-        exit 1
-      fi
-      # pick the first match after sorting by name
-      RESOLVED_PKL=$(ls -1 ${CANDIDATES[@]} | sort | head -n1)
-      DATASET_BASE=$(basename "${RESOLVED_PKL}" .pkl)   # e.g., D1_1k
-      DATASET="${DATASET_BASE}_train"                    # temporary, will remap to base_n_train
-      echo "[INFO] Resolved PKL base=$(basename "${RESOLVED_PKL}") -> temp DATASET=${DATASET}"
-    fi
-  fi
-
-  # Expect DATASET like D1_1k_train or D1_1k_test
-  DATASET_BASE="${DATASET%_*}"
-  SPLIT_SUFFIX="${DATASET##*_}"
-  OUT_DIR="data/diff_awareness/dataset"
-  # Map PKL base like D1_1k -> output base D1, and always use PRE_N naming (e.g., D1_100_train/test)
-  OUTPUT_BASE="${DATASET_BASE%%_*}"
-  RUNTIME_DATASET="${OUTPUT_BASE}_${PRE_N}_${SPLIT_SUFFIX}"
-  TRAIN_JSON="${OUT_DIR}/${OUTPUT_BASE}_${PRE_N}_train.json"
-  TEST_JSON="${OUT_DIR}/${OUTPUT_BASE}_${PRE_N}_test.json"
-  
-  # Ensure PKL symlinks exist (non-fatal if already present)
-  mkdir -p data/diff_awareness/benchmark_suite "${OUT_DIR}"
+  mkdir -p data/diff_awareness/benchmark_suite data/diff_awareness/dataset
+  # Ensure PKL symlinks
   for f in /data/jehc223/difference_awareness/benchmark_suite/*.pkl; do
     [ -e "$f" ] || continue
     bn=$(basename "$f")
@@ -165,52 +120,103 @@ if [ "${DOMAIN}" = "diff" ]; then
     fi
   done
 
+  if [ -z "${DATASET##*_train}" ] || [ -z "${DATASET##*_test}" ]; then
+    # already full name; keep
+    DATASET_BASE="${DATASET%_*}"
+    SPLIT_SUFFIX="${DATASET##*_}"
+  else
+    # shorthand e.g. D1 -> resolve PKL base (e.g., D1_1k), then map to D1_{PRE_N}_test
+    CANDIDATES=(data/diff_awareness/benchmark_suite/${DATASET}_*.pkl)
+    if [ ! -e "${CANDIDATES[0]}" ]; then
+      echo "[ERROR] Could not resolve dataset base for '${DATASET}'." >&2
+      exit 1
+    fi
+    RESOLVED_PKL=$(ls -1 ${CANDIDATES[@]} | sort | head -n1)
+    DATASET_BASE=$(basename "${RESOLVED_PKL}" .pkl)
+    SPLIT_SUFFIX="test"
+    echo "[INFO] Resolved PKL base=$(basename "${RESOLVED_PKL}")"
+  fi
+
+  OUTPUT_BASE="${DATASET_BASE%%_*}"
+  RUNTIME_DATASET="${OUTPUT_BASE}_${PRE_N}_${SPLIT_SUFFIX}"
+  TRAIN_JSON="data/diff_awareness/dataset/${OUTPUT_BASE}_${PRE_N}_train.json"
+  TEST_JSON="data/diff_awareness/dataset/${OUTPUT_BASE}_${PRE_N}_test.json"
+
   if [ ! -f "${TRAIN_JSON}" ] || [ ! -f "${TEST_JSON}" ]; then
     echo "[INFO] Preprocessing ${DATASET_BASE} -> ${OUTPUT_BASE}_${PRE_N}_{train,test}.json ..."
     python scripts/diff_awareness/preprocess.py \
       --dataset_name "${DATASET_BASE}" \
       --n "${PRE_N}" \
       --source_dir "data/diff_awareness/benchmark_suite" \
-      --out_dir "${OUT_DIR}"
+      --out_dir "data/diff_awareness/dataset"
   else
-    echo "[INFO] Found existing ${TRAIN_JSON} and ${TEST_JSON}, skipping preprocessing."
+    echo "[INFO] Found ${TRAIN_JSON} and ${TEST_JSON}"
   fi
 
-  # Override DATASET to the runtime dataset name (either original base or PRE_N-based)
   DATASET="${RUNTIME_DATASET}"
   echo "[INFO] Using runtime DATASET=${DATASET}"
 fi
 
-# Auto-generate experiment name if not provided, using final DATASET (e.g., diff_d1_100_prompt)
+# Experience file (user can pass only the step dir; we resolve to experiences.json)
+EXPERIENCE_STEP_DIR=${EXPERIENCE_STEP_DIR:-}
+EXPERIENCE_FILE=${EXPERIENCE_FILE:-}
+if [ -z "${EXPERIENCE_FILE}" ] && [ -n "${EXPERIENCE_STEP_DIR}" ]; then
+  EXPERIENCE_FILE="${EXPERIENCE_STEP_DIR%/}/experiences.json"
+fi
+if [ -n "${EXPERIENCE_FILE}" ]; then
+  echo "[INFO] Using experiences from ${EXPERIENCE_FILE}"
+  EXPERIENCE_SUFFIX=$(basename "${EXPERIENCE_FILE}")
+  EXPERIENCE_SUFFIX="${EXPERIENCE_SUFFIX%.*}"
+  EXPERIENCE_SUFFIX=${EXPERIENCE_SUFFIX//[^A-Za-z0-9]/_}
+  # trim to last two underscore-separated segments to avoid long suffixes
+  IFS='_' read -ra EXP_SEG <<<"${EXPERIENCE_SUFFIX}"
+  SEG_COUNT=${#EXP_SEG[@]}
+  if [ "${SEG_COUNT}" -gt 2 ]; then
+    EXPERIENCE_SUFFIX="${EXP_SEG[$((SEG_COUNT-2))]}_${EXP_SEG[$((SEG_COUNT-1))]}"
+  fi
+  if [ -n "${EXPERIENCE_SUFFIX}" ]; then
+    EXPERIENCE_SUFFIX="_${EXPERIENCE_SUFFIX}"
+  fi
+else
+  EXPERIENCE_SUFFIX=""
+fi
+
+# Auto experiment name: include final dataset and _eval suffix
 if [ -z "${EXPERIMENT_NAME}" ]; then
-  DATASET_BASE_GUESS="${DATASET%_*}"  # strip trailing _train/_test when present
+  DATASET_BASE_GUESS="${DATASET%_*}"
   DOMAIN_L=$(echo "${DOMAIN}" | tr '[:upper:]' '[:lower:]')
   DATASET_L=$(echo "${DATASET_BASE_GUESS}" | tr '[:upper:]' '[:lower:]')
   MODE_L=$(echo "${MODE}" | tr '[:upper:]' '[:lower:]')
-  EXPERIMENT_NAME="${DOMAIN_L}_${DATASET_L}_${MODE_L}"
+  EXPERIMENT_NAME="${DOMAIN_L}_${DATASET_L}_${MODE_L}_eval"
   echo "[INFO] Auto EXPERIMENT_NAME=${EXPERIMENT_NAME}"
 fi
 
-echo "[INFO] Starting Training-Free GRPO run"
-
-# Build optional args
-EXTRA_ARGS=""
-if [ -n "${DATASET_TRUNCATE}" ]; then
-  EXTRA_ARGS+=" --dataset_truncate \"${DATASET_TRUNCATE}\""
+if [ -n "${EXPERIENCE_SUFFIX}" ]; then
+  EXPERIMENT_NAME="${EXPERIMENT_NAME}${EXPERIENCE_SUFFIX}"
+  echo "[INFO] Experiment name with experience suffix: ${EXPERIMENT_NAME}"
 fi
 
-python -m training_free_grpo.train \
+# Run evaluation rollouts
+echo "[INFO] Starting evaluation rollouts"
+python -m training_free_grpo.main \
   --mode "${MODE}" \
   --domain "${DOMAIN}" \
   --experiment_name "${EXPERIMENT_NAME}" \
   --dataset "${DATASET}" \
-  --epochs "${EPOCHS}" \
-  --batchsize "${BATCHSIZE}" \
-  --grpo_n "${GRPO_N}" \
   --rollout_concurrency "${ROLLOUT_CONCURRENCY}" \
-  --rollout_temperature "${ROLLOUT_TEMPERATURE}" \
   --rollout_max_tokens "${ROLLOUT_MAX_TOKENS}" \
-  --task_timeout "${TASK_TIMEOUT}" \
-  ${EXTRA_ARGS}
+  --pass_k "${PASS_K}" \
+  ${EXPERIENCE_FILE:+--experience_file "${EXPERIENCE_FILE}"}
 
-echo "[INFO] Training run completed"
+# Compute custom metrics for diff domain
+if [ "${DOMAIN}" = "diff" ]; then
+  ROLLOUT_FILE="data/${DOMAIN}/eval/${EXPERIMENT_NAME}.jsonl"
+  if [ -f "${ROLLOUT_FILE}" ]; then
+    echo "[INFO] Computing Difference/Context Awareness metrics from ${ROLLOUT_FILE}"
+    python scripts/diff_awareness/evaluate_diff_metrics.py --rollout_file "${ROLLOUT_FILE}"
+  else
+    echo "[WARN] Rollout file not found: ${ROLLOUT_FILE}"
+  fi
+fi
+
+echo "[INFO] Evaluation completed"

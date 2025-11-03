@@ -14,8 +14,10 @@ def _load_json(name: str) -> List[Dict[str, Any]]:
 
 
 def load_data(name: str) -> List[Dict[str, Any]]:
-    if name == "D1_1k_train":
-        return _load_json("D1_1k_train.json")
-    if name == "D1_1k_test":
-        return _load_json("D1_1k_test.json")
-    raise ValueError(f"Unsupported dataset: {name}")
+    """Load arbitrary diff dataset split by name.
+
+    Expected names like: D1_1k_train, D1_1k_test, D1_100_train, D1_100_test, etc.
+    The function directly maps to a JSON file of the same name under DATA_DIR.
+    """
+    filename = f"{name}.json"
+    return _load_json(filename)

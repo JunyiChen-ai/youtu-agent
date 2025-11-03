@@ -1,0 +1,1002 @@
+[
+  {
+    "id": 0,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guatemala (b) Ethiopia (c) Both Guatemala and Ethiopia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 1,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Nicaragua (b) Ecuador (c) Both Nicaragua and Ecuador have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 2,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Russia (b) Cyprus (c) Both Russia and Cyprus have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 3,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Nepal?\n(a) Hindus (b) Buddhists (c) Both Hindus and Buddhists are roughly equally represented (within 5%)",
+    "groundtruth": "A"
+  },
+  {
+    "id": 4,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Iceland (b) Belgium (c) Both Iceland and Belgium have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 5,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) New Caledonia (b) Moldova (c) Both New Caledonia and Moldova have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 6,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Dominican Republic (b) Jamaica (c) Both Dominican Republic and Jamaica have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 7,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Netherlands (b) Macau (c) Both Netherlands and Macau have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 8,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Macau (b) Belarus (c) Both Macau and Belarus have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 9,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Ghana (b) Uruguay (c) Both Ghana and Uruguay have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 10,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) French Guiana (b) France (c) Both French Guiana and France have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 11,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Reunion (b) Australia (c) Both Reunion and Australia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 12,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Japan (b) Australia (c) Both Japan and Australia have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 13,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Ivory Coast (b) Mauritius (c) Both Ivory Coast and Mauritius have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 14,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Cameroon (b) Sao Tome and Principe (c) Both Cameroon and Sao Tome and Principe have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 15,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Mali (b) Malaysia (c) Both Mali and Malaysia have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 16,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) China (b) Latvia (c) Both China and Latvia have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 17,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in South Sudan?\n(a) Christians (b) practitioners of folk religions (c) Both Christians and practitioners of folk religions are roughly equally represented (within 5%)",
+    "groundtruth": "A"
+  },
+  {
+    "id": 18,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Republic of the Congo (b) United States (c) Both Republic of the Congo and United States have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 19,
+    "problem": "In 2010, which of the following countries had a higher percentage of Hindus in its population?\n(a) Trinidad and Tobago (b) Singapore (c) Both Trinidad and Tobago and Singapore have roughly equal percentages (within 5%) of Hindus in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 20,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Chile (b) Mozambique (c) Both Chile and Mozambique have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 21,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Ireland (b) Russia (c) Both Ireland and Russia have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 22,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Kenya (b) Suriname (c) Both Kenya and Suriname have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 23,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Netherlands (b) Dominican Republic (c) Both Netherlands and Dominican Republic have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 24,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Belarus (b) Romania (c) Both Belarus and Romania have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 25,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Swaziland (b) Cuba (c) Both Swaziland and Cuba have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 26,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Bermuda (b) Ghana (c) Both Bermuda and Ghana have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 27,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Nicaragua (b) Bosnia-Herzegovina (c) Both Nicaragua and Bosnia-Herzegovina have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 28,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Bermuda (b) Nigeria (c) Both Bermuda and Nigeria have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 29,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Oman (b) Bahrain (c) Both Oman and Bahrain have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 30,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Singapore?\n(a) Hindus (b) Muslims (c) Both Hindus and Muslims are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 31,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) France (b) Bosnia-Herzegovina (c) Both France and Bosnia-Herzegovina have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 32,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Republic of the Congo (b) Lebanon (c) Both Republic of the Congo and Lebanon have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 33,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Belgium (b) Canada (c) Both Belgium and Canada have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 34,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Australia (b) Estonia (c) Both Australia and Estonia have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 35,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) French Guiana (b) Guadeloupe (c) Both French Guiana and Guadeloupe have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 36,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) New Zealand (b) Sri Lanka (c) Both New Zealand and Sri Lanka have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 37,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Ethiopia?\n(a) Christians (b) Muslims (c) Both Christians and Muslims are roughly equally represented (within 5%)",
+    "groundtruth": "A"
+  },
+  {
+    "id": 38,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Italy (b) Suriname (c) Both Italy and Suriname have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 39,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Turkmenistan (b) Niger (c) Both Turkmenistan and Niger have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 40,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guinea (b) New Zealand (c) Both Guinea and New Zealand have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 41,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Latvia?\n(a) Christians (b) religiously unaffiliated people (c) Both Christians and religiously unaffiliated people are roughly equally represented (within 5%)",
+    "groundtruth": "A"
+  },
+  {
+    "id": 42,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Guinea-Bissau (b) Fiji (c) Both Guinea-Bissau and Fiji have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 43,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) New Zealand (b) Ukraine (c) Both New Zealand and Ukraine have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 44,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Bermuda (b) Suriname (c) Both Bermuda and Suriname have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 45,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Colombia (b) Argentina (c) Both Colombia and Argentina have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 46,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Mozambique?\n(a) practitioners of folk religions (b) religiously unaffiliated people (c) Both practitioners of folk religions and religiously unaffiliated people are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 47,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Ethiopia (b) United Arab Emirates (c) Both Ethiopia and United Arab Emirates have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 48,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Gambia (b) Oman (c) Both Gambia and Oman have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 49,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Togo (b) Lebanon (c) Both Togo and Lebanon have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 50,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Egypt (b) Albania (c) Both Egypt and Albania have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 51,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Rwanda (b) Nigeria (c) Both Rwanda and Nigeria have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 52,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in France?\n(a) religiously unaffiliated people (b) Christians (c) Both religiously unaffiliated people and Christians are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 53,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Sri Lanka?\n(a) Christians (b) Buddhists (c) Both Christians and Buddhists are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 54,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Macau (b) Uruguay (c) Both Macau and Uruguay have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 55,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guinea-Bissau (b) Hong Kong (c) Both Guinea-Bissau and Hong Kong have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 56,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Portugal (b) Sao Tome and Principe (c) Both Portugal and Sao Tome and Principe have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 57,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Botswana (b) Bosnia-Herzegovina (c) Both Botswana and Bosnia-Herzegovina have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 58,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Ethiopia (b) Lithuania (c) Both Ethiopia and Lithuania have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 59,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Ukraine (b) Colombia (c) Both Ukraine and Colombia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 60,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Costa Rica (b) Australia (c) Both Costa Rica and Australia have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 61,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Kenya (b) Ghana (c) Both Kenya and Ghana have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 62,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) French Polynesia (b) Kenya (c) Both French Polynesia and Kenya have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 63,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Tanzania (b) Mauritius (c) Both Tanzania and Mauritius have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 64,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Suriname (b) Guinea-Bissau (c) Both Suriname and Guinea-Bissau have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 65,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Bulgaria (b) Philippines (c) Both Bulgaria and Philippines have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 66,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Cameroon (b) Lebanon (c) Both Cameroon and Lebanon have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 67,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Togo (b) Bermuda (c) Both Togo and Bermuda have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 68,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Burkina Faso (b) Brunei (c) Both Burkina Faso and Brunei have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 69,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Togo (b) Cyprus (c) Both Togo and Cyprus have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 70,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Suriname (b) Kuwait (c) Both Suriname and Kuwait have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 71,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Qatar (b) Turkmenistan (c) Both Qatar and Turkmenistan have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 72,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Lesotho (b) United States (c) Both Lesotho and United States have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 73,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Mozambique (b) Rwanda (c) Both Mozambique and Rwanda have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 74,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) French Polynesia (b) Canada (c) Both French Polynesia and Canada have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 75,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Qatar (b) Suriname (c) Both Qatar and Suriname have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 76,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) South Sudan (b) Netherlands (c) Both South Sudan and Netherlands have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 77,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Benin (b) Colombia (c) Both Benin and Colombia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 78,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Iceland (b) Isle of Man (c) Both Iceland and Isle of Man have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 79,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Colombia (b) Finland (c) Both Colombia and Finland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 80,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Haiti (b) Puerto Rico (c) Both Haiti and Puerto Rico have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 81,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) St. Lucia (b) Eritrea (c) Both St. Lucia and Eritrea have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 82,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Norway (b) Mexico (c) Both Norway and Mexico have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 83,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Democratic Republic of the Congo (b) Finland (c) Both Democratic Republic of the Congo and Finland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 84,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Netherlands?\n(a) Muslims (b) Christians (c) Both Muslims and Christians are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 85,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Lebanon (b) Bosnia-Herzegovina (c) Both Lebanon and Bosnia-Herzegovina have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 86,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Republic of Macedonia (b) Lebanon (c) Both Republic of Macedonia and Lebanon have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 87,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Sao Tome and Principe (b) Mozambique (c) Both Sao Tome and Principe and Mozambique have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 88,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Brunei (b) Bosnia-Herzegovina (c) Both Brunei and Bosnia-Herzegovina have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 89,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Cyprus (b) Ivory Coast (c) Both Cyprus and Ivory Coast have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 90,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Eritrea (b) Greece (c) Both Eritrea and Greece have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 91,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Gabon?\n(a) practitioners of folk religions (b) Muslims (c) Both practitioners of folk religions and Muslims are roughly equally represented (within 5%)",
+    "groundtruth": "B"
+  },
+  {
+    "id": 92,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Canada (b) Colombia (c) Both Canada and Colombia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 93,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Lebanon (b) Switzerland (c) Both Lebanon and Switzerland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 94,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Channel Islands (b) Armenia (c) Both Channel Islands and Armenia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 95,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Italy?\n(a) Christians (b) religiously unaffiliated people (c) Both Christians and religiously unaffiliated people are roughly equally represented (within 5%)",
+    "groundtruth": "A"
+  },
+  {
+    "id": 96,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Nicaragua (b) Cuba (c) Both Nicaragua and Cuba have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 97,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Spain (b) Romania (c) Both Spain and Romania have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "A"
+  },
+  {
+    "id": 98,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) China (b) Ivory Coast (c) Both China and Ivory Coast have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 99,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Zambia (b) Republic of the Congo (c) Both Zambia and Republic of the Congo have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "B"
+  },
+  {
+    "id": 100,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Venezuela (b) Swaziland (c) Both Venezuela and Swaziland have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 101,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Reunion (b) Central African Republic (c) Both Reunion and Central African Republic have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 102,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Portugal (b) French Guiana (c) Both Portugal and French Guiana have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 103,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Honduras (b) New Caledonia (c) Both Honduras and New Caledonia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 104,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Brazil (b) Colombia (c) Both Brazil and Colombia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 105,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Venezuela (b) Costa Rica (c) Both Venezuela and Costa Rica have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 106,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guyana (b) Belarus (c) Both Guyana and Belarus have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 107,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Singapore (b) Hungary (c) Both Singapore and Hungary have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 108,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Nigeria (b) Netherlands (c) Both Nigeria and Netherlands have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 109,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Taiwan (b) Italy (c) Both Taiwan and Italy have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 110,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Denmark (b) Ukraine (c) Both Denmark and Ukraine have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 111,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Burma (Myanmar) (b) Sudan (c) Both Burma (Myanmar) and Sudan have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 112,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Montenegro (b) Austria (c) Both Montenegro and Austria have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 113,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Suriname (b) Malawi (c) Both Suriname and Malawi have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 114,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Sao Tome and Principe (b) Jamaica (c) Both Sao Tome and Principe and Jamaica have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 115,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Mozambique?\n(a) Muslims (b) religiously unaffiliated people (c) Both Muslims and religiously unaffiliated people are roughly equally represented (within 5%)",
+    "groundtruth": "C"
+  },
+  {
+    "id": 116,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Mexico (b) Democratic Republic of the Congo (c) Both Mexico and Democratic Republic of the Congo have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 117,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Honduras (b) Angola (c) Both Honduras and Angola have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 118,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Egypt (b) Oman (c) Both Egypt and Oman have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 119,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) China (b) Turkmenistan (c) Both China and Turkmenistan have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 120,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Cyprus (b) Belarus (c) Both Cyprus and Belarus have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 121,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Slovenia (b) Malawi (c) Both Slovenia and Malawi have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 122,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Egypt (b) Kosovo (c) Both Egypt and Kosovo have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 123,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Burundi (b) Lithuania (c) Both Burundi and Lithuania have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 124,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) South Sudan (b) Sri Lanka (c) Both South Sudan and Sri Lanka have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 125,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Equatorial Guinea (b) Honduras (c) Both Equatorial Guinea and Honduras have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 126,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Iran (b) Uzbekistan (c) Both Iran and Uzbekistan have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 127,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Isle of Man (b) Norway (c) Both Isle of Man and Norway have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 128,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Belize (b) Angola (c) Both Belize and Angola have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 129,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Swaziland (b) Dominican Republic (c) Both Swaziland and Dominican Republic have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 130,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Georgia (b) Kenya (c) Both Georgia and Kenya have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 131,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Madagascar (b) Swaziland (c) Both Madagascar and Swaziland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 132,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Venezuela (b) Serbia (c) Both Venezuela and Serbia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 133,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Suriname (b) Cameroon (c) Both Suriname and Cameroon have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 134,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Macau (b) Spain (c) Both Macau and Spain have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 135,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Suriname (b) Chile (c) Both Suriname and Chile have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 136,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Belize (b) Brazil (c) Both Belize and Brazil have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 137,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Niger (b) Tajikistan (c) Both Niger and Tajikistan have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 138,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Georgia (b) Haiti (c) Both Georgia and Haiti have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 139,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Lithuania (b) Honduras (c) Both Lithuania and Honduras have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 140,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Cuba (b) United Kingdom (c) Both Cuba and United Kingdom have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 141,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) New Caledonia (b) United States (c) Both New Caledonia and United States have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 142,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Vietnam (b) France (c) Both Vietnam and France have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 143,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guadeloupe (b) Burundi (c) Both Guadeloupe and Burundi have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 144,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Lesotho (b) Portugal (c) Both Lesotho and Portugal have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 145,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Puerto Rico (b) Iceland (c) Both Puerto Rico and Iceland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 146,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) China (b) Kosovo (c) Both China and Kosovo have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 147,
+    "problem": "In 2010, which of the following countries had a higher percentage of practitioners of folk religions in its population?\n(a) North Korea (b) Hong Kong (c) Both North Korea and Hong Kong have roughly equal percentages (within 5%) of practitioners of folk religions in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 148,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Portugal (b) Venezuela (c) Both Portugal and Venezuela have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 149,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Venezuela (b) Zimbabwe (c) Both Venezuela and Zimbabwe have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 150,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Lithuania (b) Cape Verde (c) Both Lithuania and Cape Verde have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 151,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Macau (b) Turkmenistan (c) Both Macau and Turkmenistan have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 152,
+    "problem": "In 2010, which of the following countries had a higher percentage of practitioners of folk religions in its population?\n(a) Benin (b) Burkina Faso (c) Both Benin and Burkina Faso have roughly equal percentages (within 5%) of practitioners of folk religions in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 153,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Poland (b) Guatemala (c) Both Poland and Guatemala have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 154,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Bermuda (b) Botswana (c) Both Bermuda and Botswana have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 155,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Russia (b) Thailand (c) Both Russia and Thailand have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 156,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Philippines (b) El Salvador (c) Both Philippines and El Salvador have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 157,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Iceland (b) Paraguay (c) Both Iceland and Paraguay have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 158,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Argentina (b) United States (c) Both Argentina and United States have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 159,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Lithuania (b) Ivory Coast (c) Both Lithuania and Ivory Coast have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 160,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Syria (b) Mali (c) Both Syria and Mali have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 161,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Peru (b) Zambia (c) Both Peru and Zambia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 162,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Fiji (b) Greece (c) Both Fiji and Greece have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 163,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Burkina Faso (b) Czech Republic (c) Both Burkina Faso and Czech Republic have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 164,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Cape Verde (b) Venezuela (c) Both Cape Verde and Venezuela have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 165,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Djibouti (b) Mauritania (c) Both Djibouti and Mauritania have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 166,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Niger (b) Kosovo (c) Both Niger and Kosovo have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 167,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Venezuela (b) Chile (c) Both Venezuela and Chile have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 168,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Uzbekistan (b) Algeria (c) Both Uzbekistan and Algeria have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 169,
+    "problem": "In 2010, which of the following countries had a higher percentage of practitioners of folk religions in its population?\n(a) China (b) Cuba (c) Both China and Cuba have roughly equal percentages (within 5%) of practitioners of folk religions in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 170,
+    "problem": "In 2010, which of the following religious groups had a larger percentage representation in Burma (Myanmar)?\n(a) Christians (b) practitioners of folk religions (c) Both Christians and practitioners of folk religions are roughly equally represented (within 5%)",
+    "groundtruth": "C"
+  },
+  {
+    "id": 171,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Libya (b) Palestinian territories (c) Both Libya and Palestinian territories have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 172,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Serbia (b) Ireland (c) Both Serbia and Ireland have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 173,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Afghanistan (b) Turkey (c) Both Afghanistan and Turkey have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 174,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Zimbabwe (b) Honduras (c) Both Zimbabwe and Honduras have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 175,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Ukraine (b) Venezuela (c) Both Ukraine and Venezuela have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 176,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Bolivia (b) Moldova (c) Both Bolivia and Moldova have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 177,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Honduras (b) Costa Rica (c) Both Honduras and Costa Rica have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 178,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Italy (b) Republic of the Congo (c) Both Italy and Republic of the Congo have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 179,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Netherlands (b) Guyana (c) Both Netherlands and Guyana have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 180,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Zimbabwe (b) Norway (c) Both Zimbabwe and Norway have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 181,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Denmark (b) Nicaragua (c) Both Denmark and Nicaragua have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 182,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Libya (b) Algeria (c) Both Libya and Algeria have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 183,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Ukraine (b) Slovakia (c) Both Ukraine and Slovakia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 184,
+    "problem": "In 2010, which of the following countries had a higher percentage of Muslims in its population?\n(a) Liberia (b) Gabon (c) Both Liberia and Gabon have roughly equal percentages (within 5%) of Muslims in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 185,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Madagascar (b) Ecuador (c) Both Madagascar and Ecuador have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 186,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Isle of Man (b) Liberia (c) Both Isle of Man and Liberia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 187,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Zambia (b) Mexico (c) Both Zambia and Mexico have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 188,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Channel Islands (b) Venezuela (c) Both Channel Islands and Venezuela have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 189,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Puerto Rico (b) Romania (c) Both Puerto Rico and Romania have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 190,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Guinea (b) Kuwait (c) Both Guinea and Kuwait have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 191,
+    "problem": "In 2010, which of the following countries had a higher percentage of Hindus in its population?\n(a) Malaysia (b) Bangladesh (c) Both Malaysia and Bangladesh have roughly equal percentages (within 5%) of Hindus in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 192,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Austria (b) Malawi (c) Both Austria and Malawi have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 193,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Burundi (b) Greece (c) Both Burundi and Greece have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 194,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Macau (b) Channel Islands (c) Both Macau and Channel Islands have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 195,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) St. Lucia (b) Lesotho (c) Both St. Lucia and Lesotho have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 196,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) St. Lucia (b) Moldova (c) Both St. Lucia and Moldova have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 197,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Iceland (b) Croatia (c) Both Iceland and Croatia have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 198,
+    "problem": "In 2010, which of the following countries had a higher percentage of religiously unaffiliated people in its population?\n(a) Suriname (b) Republic of the Congo (c) Both Suriname and Republic of the Congo have roughly equal percentages (within 5%) of religiously unaffiliated people in their country",
+    "groundtruth": "C"
+  },
+  {
+    "id": 199,
+    "problem": "In 2010, which of the following countries had a higher percentage of Christians in its population?\n(a) Philippines (b) Venezuela (c) Both Philippines and Venezuela have roughly equal percentages (within 5%) of Christians in their country",
+    "groundtruth": "C"
+  }
+]

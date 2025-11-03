@@ -29,7 +29,10 @@ async def main(args):
     elif args.domain == "diff":
         from training_free_grpo.diff.dataset import load_data
         from training_free_grpo.diff.verify import verify_func
-        from training_free_grpo.diff.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
+        from training_free_grpo.diff.prompts import (
+            PROBLEM_WITH_EXPERIENCE_TEMPLATE,
+            PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE,
+        )
         from training_free_grpo.diff.experience import ExperienceUpdater
         config_name = "simple/diff_agent.yaml"
     else:
@@ -117,14 +120,34 @@ async def main(args):
                 experiences = {}
             
             # Format the batch data with experiences
-            formatted_experiences = "\n".join([ f"[{i}]. {e}" for i, e in experiences.items() ])
-            formatted_batch_data = [{
-                "prompt": PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
-                    experiences=formatted_experiences if formatted_experiences else "None",
-                    problem=each["problem"],
-                ) if experiences else each["problem"],
-                **each
-            } for each in batch_data]
+            formatted_experiences = (
+                "\n".join([f"[{i}]. {e}" for i, e in experiences.items()])
+                if experiences
+                else ""
+            )
+
+            def build_prompt(problem: str) -> str:
+                if args.domain == "diff":
+                    if experiences:
+                        return PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
+                            experiences=formatted_experiences,
+                            problem=problem,
+                        )
+                    return PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE.format(problem=problem)
+                if experiences:
+                    return PROBLEM_WITH_EXPERIENCE_TEMPLATE.format(
+                        experiences=formatted_experiences,
+                        problem=problem,
+                    )
+                return problem
+
+            formatted_batch_data = [
+                {
+                    "prompt": build_prompt(each["problem"]),
+                    **each,
+                }
+                for each in batch_data
+            ]
             
             # Duplicate for GRPO
             print(f"GRPO rollout number={args.grpo_n}")

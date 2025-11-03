@@ -119,7 +119,9 @@ class ExperienceUpdater:
                         {"role": "user", "content": up},
                     ]
                 )
-                return {"trajectory_summary": response, **cur}
+                # Attach model_answer if present from rollout stage; fallback to None (do not re-extract here)
+                model_answer = cur.get("model_answer")
+                return {"trajectory_summary": response, "model_answer": model_answer, **cur}
             except Exception as e:
                 print(f"Warning: failed in single rollout summary, {e}")
                 return None
@@ -189,7 +191,9 @@ class ExperienceUpdater:
                 pattern = re.compile(r"<Experiences>\s*(.*?)\s*</Experiences>", re.DOTALL | re.IGNORECASE)
                 match = pattern.search(response)
                 extracted = match.group(1).strip() if match else ""
-                return {"rollouts": rollouts_per_problem, "critique": response, "experiences": extracted}
+                # Collect model answers from rollouts if available
+                model_answers = [each.get("model_answer") for each in rollouts_per_problem]
+                return {"rollouts": rollouts_per_problem, "critique": response, "experiences": extracted, "model_answers": model_answers}
             except Exception as e:
                 print(f"Warning: failed in single query critique, {e}")
                 return None

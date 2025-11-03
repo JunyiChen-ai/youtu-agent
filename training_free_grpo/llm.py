@@ -11,7 +11,7 @@ class LLM:
             base_url=EnvUtils.get_env("UTU_LLM_BASE_URL"),
         )
 
-    def chat(self, messages_or_prompt, max_tokens=16384, temperature=0, max_retries=3, return_reasoning=False):
+    def chat(self, messages_or_prompt, max_tokens=16384, temperature=0, max_retries=3, return_reasoning=False, response_format: dict | None = None):
         for _ in range(max_retries):
             try:
                 if isinstance(messages_or_prompt, str):
@@ -21,12 +21,29 @@ class LLM:
                 else:
                     raise ValueError("messages_or_prompt must be a string or a list of messages.")
 
-                response = self.client.chat.completions.create(
-                    model=self.model_name,
-                    messages=messages,
-                    max_tokens=max_tokens,
-                    temperature=temperature,
-                )
+                # Try with response_format if provided; on failure, warn and fall back once.
+                response = None
+                attempted_with_format = False
+                if response_format is not None:
+                    try:
+                        attempted_with_format = True
+                        response = self.client.chat.completions.create(
+                            model=self.model_name,
+                            messages=messages,
+                            max_tokens=max_tokens,
+                            temperature=temperature,
+                            response_format=response_format,
+                        )
+                    except Exception as e:
+                        print(f"Warning: response_format not applied due to error: {e}. Falling back to default text response.")
+
+                if response is None:
+                    response = self.client.chat.completions.create(
+                        model=self.model_name,
+                        messages=messages,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                    )
                 response_text = response.choices[0].message.content.strip()
 
                 if return_reasoning:
