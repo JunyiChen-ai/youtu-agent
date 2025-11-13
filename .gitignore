@@ -44,6 +44,10 @@ wheels/
 /.cache/
 /site/
 /logs/
+/data/diff/
+/data/diff_awareness/dataset/N2_100_*.json
+/data/diff_awareness/dataset/N3_100_*.json
+/data/diff_awareness/dataset/N4_100_*.json
 
 # generated configs
 /configs/tools/generated

@@ -33,7 +33,10 @@ class ExperienceUpdater:
         max_workers: int = 16,
         given_ground_truth: bool = True,
         only_partial_correct: bool = True,
+        dataset_name: str | None = None,
     ):
+        dataset_name = (dataset_name or '' ).lower()
+        include_all_nonperfect = dataset_name.startswith('n3_')
         # 1. Summarize trajectory for each rollout
         problem_to_summarized_rollouts = self._single_rollout_summary(
             rollouts=rollouts,
@@ -41,6 +44,7 @@ class ExperienceUpdater:
             max_workers=max_workers,
             given_ground_truth=given_ground_truth,
             only_partial_correct=only_partial_correct,
+            include_all_nonperfect=include_all_nonperfect,
         )
 
         # 2. Generate critique for each query
@@ -51,6 +55,7 @@ class ExperienceUpdater:
             max_workers=max_workers,
             given_ground_truth=given_ground_truth,
             only_partial_correct=only_partial_correct,
+            include_all_nonperfect=include_all_nonperfect,
         )
 
         # 3. group update experiences
@@ -79,6 +84,7 @@ class ExperienceUpdater:
         max_workers,
         given_ground_truth=True,
         only_partial_correct=True,
+        include_all_nonperfect=False,
     ):
         filename = os.path.join(save_dir, "single_rollout_summary.json")
         if os.path.exists(filename):
@@ -101,7 +107,7 @@ class ExperienceUpdater:
             if given_ground_truth and only_partial_correct:
                 scores = [each["reward"] for each in rlist]
                 avg = sum(scores) / len(scores)
-                if avg > 0 and avg < 1:
+                if (avg < 1 if include_all_nonperfect else (avg > 0 and avg < 1)):
                     all_rollouts_to_process.extend(rlist)
             else:
                 all_rollouts_to_process.extend(rlist)
@@ -147,6 +153,7 @@ class ExperienceUpdater:
         max_operations=1,
         given_ground_truth=True,
         only_partial_correct=True,
+        include_all_nonperfect=False,
     ):
         filename = os.path.join(save_dir, "single_query_critique.json")
         if os.path.exists(filename):
@@ -162,7 +169,7 @@ class ExperienceUpdater:
             if given_ground_truth and only_partial_correct:
                 scores = [each["reward"] for each in rlist]
                 avg = sum(scores) / len(scores)
-                if avg > 0 and avg < 1:
+                if (avg < 1 if include_all_nonperfect else (avg > 0 and avg < 1)):
                     all_groups.append(rlist)
             else:
                 all_groups.append(rlist)

@@ -174,14 +174,18 @@ async def main(args):
             if os.path.exists(next_experience_filename):
                 print(f"Experiences already exist for step {step}, skipping experience update")
             else:
-                new_experiences = ExperienceUpdater().run(
-                    rollouts=rollouts, 
+                updater = ExperienceUpdater()
+                run_kwargs = dict(
+                    rollouts=rollouts,
                     experiences=experiences,
                     save_dir=cur_step_dir,
                     max_workers=args.rollout_concurrency,
-                    given_ground_truth=True if args.given_ground_truth=="True" else False,
+                    given_ground_truth=True if args.given_ground_truth == "True" else False,
                     only_partial_correct=True if args.grpo_n > 1 else False,
                 )
+                if args.domain == "diff":
+                    run_kwargs["dataset_name"] = args.dataset
+                new_experiences = updater.run(**run_kwargs)
                 json.dump(new_experiences, open(next_experience_filename, "w"), indent=2)
                 print(f"Saved {len(new_experiences)} experiences to {next_experience_filename}")
 
