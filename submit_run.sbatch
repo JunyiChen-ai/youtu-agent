@@ -14,6 +14,16 @@ REPO_ROOT="/data/jehc223/youtu-agent"
 cd "$REPO_ROOT"
 mkdir -p logs
 
+echo "[INFO] Testing HuggingFace connectivity..."
+HF_STATUS=$(curl -s -o /tmp/hf_connectivity.txt -w "%{http_code}" https://huggingface.co)
+if [ "${HF_STATUS}" != "200" ]; then
+  echo "[ERROR] HuggingFace connectivity test failed with HTTP status ${HF_STATUS}." >&2
+  echo "[ERROR] Response body:" >&2
+  cat /tmp/hf_connectivity.txt >&2 || true
+  exit 1
+fi
+echo "[INFO] HuggingFace connectivity verified."
+
 # Activate project virtual environment
 source "${REPO_ROOT}/.venv/bin/activate"
 
@@ -42,8 +52,12 @@ VLLM_GPU_UTIL=${VLLM_GPU_UTIL:-0.7}
 UTU_DB_URL=${UTU_DB_URL:-sqlite:///utu.db}
 
 # Ensure proxy variables do not interfere with local requests
-export NO_PROXY=127.0.0.1,localhost; export no_proxy=127.0.0.1,localhost
-# unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+export http_proxy=http://squid.auckland.ac.nz:3128
+export https_proxy=http://squid.auckland.ac.nz:3128
+export HTTP_PROXY=http://squid.auckland.ac.nz:3128
+export HTTPS_PROXY=http://squid.auckland.ac.nz:3128
+export NO_PROXY=127.0.0.1,localhost
+export no_proxy=127.0.0.1,localhost
 
 VLLM_TOOL_FLAGS=()
 if [ "${MODE_LOWER}" != "prompt" ]; then
@@ -99,8 +113,27 @@ UTU_LLM_MODEL=${UTU_LLM_MODEL}
 UTU_LLM_BASE_URL=${UTU_LLM_BASE_URL}
 UTU_LLM_API_KEY=${UTU_LLM_API_KEY}
 DB_URL=${UTU_DB_URL}
+SERPER_API_KEY=10ea7b9b4992460dfa27ffbc910bf90adfa9a8d4
+JINA_API_KEY=jina_088d95811e374a1f8ee2628597af857fcxnCbTVePqA1DrJ2XEkFQfN1gldf
 EOF
 echo "[INFO] Wrote .env with UTU_LLM_BASE_URL=${UTU_LLM_BASE_URL}"
+
+if [ "${MODE_LOWER}" = "agent" ]; then
+  echo "[INFO] Testing Jina search connectivity..."
+  JINA_KEY=jina_088d95811e374a1f8ee2628597af857fcxnCbTVePqA1DrJ2XEkFQfN1gldf
+  JINA_STATUS=$(curl -s -o /tmp/jina_test.json -w "%{http_code}" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer ${JINA_KEY}" \
+    -H "X-Respond-With: no-content" \
+    "https://s.jina.ai/?q=test")
+  if [ "${JINA_STATUS}" != "200" ]; then
+    echo "[ERROR] Jina connectivity test failed with HTTP status ${JINA_STATUS}." >&2
+    echo "[ERROR] Response body:" >&2
+    cat /tmp/jina_test.json >&2 || true
+    exit 1
+  fi
+  echo "[INFO] Jina connectivity verified."
+fi
 
 EXPERIMENT_NAME=${EXPERIMENT_NAME:-}
 DOMAIN=${DOMAIN:-math}

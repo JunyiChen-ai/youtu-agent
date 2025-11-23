@@ -19,13 +19,15 @@ async def main(args):
         from training_free_grpo.math.verify import verify_func
         from training_free_grpo.math.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
         from training_free_grpo.math.experience import ExperienceUpdater
-        config_name = "simple/math_agent.yaml"
+        config_name_prompt = "simple/math_agent.yaml"
+        config_name_agent = "simple/math_agent.yaml"
     elif args.domain == "web":
         from training_free_grpo.web.dataset import load_data
         from training_free_grpo.web.verify import verify_func
         from training_free_grpo.web.prompts import PROBLEM_WITH_EXPERIENCE_TEMPLATE
         from training_free_grpo.web.experience import ExperienceUpdater
-        config_name = "simple/base_search.yaml"
+        config_name_prompt = "simple/base_search.yaml"
+        config_name_agent = "simple/base_search.yaml"
     elif args.domain == "diff":
         from training_free_grpo.diff.dataset import load_data
         from training_free_grpo.diff.verify import verify_func
@@ -34,7 +36,8 @@ async def main(args):
             PROBLEM_WITHOUT_EXPERIENCE_TEMPLATE,
         )
         from training_free_grpo.diff.experience import ExperienceUpdater
-        config_name = "simple/diff_agent.yaml"
+        config_name_prompt = "simple/diff_agent.yaml"
+        config_name_agent = "simple/diff_search_agent.yaml"
     else:
         raise ValueError(f"Unsupported domain: {args.domain}")
     
@@ -46,7 +49,7 @@ async def main(args):
     if args.mode == "prompt":
         worker_agent = None
     elif args.mode == "agent":
-        config = ConfigLoader.load_agent_config(config_name)
+        config = ConfigLoader.load_agent_config(config_name_agent)
         config.model.model_settings.temperature = args.rollout_temperature
         worker_agent = SimpleAgent(config=config)
         await worker_agent.build()
